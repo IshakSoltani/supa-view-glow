@@ -1,14 +1,18 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Claim } from "@/pages/FraudDashboard";
-import { Brain, Shield, FileText, MessageSquare } from "lucide-react";
+import { Brain, Shield, FileText, MessageSquare, ChevronDown, ChevronUp } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
 
 interface AIAnalysisPanelProps {
   claim: Claim;
 }
 
 export const AIAnalysisPanel = ({ claim }: AIAnalysisPanelProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const getScoreValue = (score: string): number => {
     if (!score) return 0;
     const numericScore = parseFloat(score);
@@ -79,15 +83,31 @@ export const AIAnalysisPanel = ({ claim }: AIAnalysisPanelProps) => {
 
         {/* AI Prediction */}
         {claim.claim_prediction && (
-          <div className="p-4 bg-muted/30 rounded-lg border border-border space-y-2">
-            <div className="flex items-center gap-2">
-              <Brain className="h-5 w-5 text-primary" />
-              <span className="text-sm font-medium text-foreground">AI Prediction Summary</span>
+          <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+            <div className="p-4 bg-muted/30 rounded-lg border border-border space-y-2">
+              <CollapsibleTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="w-full flex items-center justify-between p-0 hover:bg-transparent"
+                >
+                  <div className="flex items-center gap-2">
+                    <Brain className="h-5 w-5 text-primary" />
+                    <span className="text-sm font-medium text-foreground">AI Prediction Summary</span>
+                  </div>
+                  {isOpen ? (
+                    <ChevronUp className="h-4 w-4 text-muted-foreground" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                  )}
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="animate-accordion-down">
+                <p className="text-sm text-muted-foreground whitespace-pre-wrap pt-2">
+                  {claim.claim_prediction}
+                </p>
+              </CollapsibleContent>
             </div>
-            <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-              {claim.claim_prediction}
-            </p>
-          </div>
+          </Collapsible>
         )}
 
         {/* Transcript */}
