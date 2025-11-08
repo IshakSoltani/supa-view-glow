@@ -5,9 +5,10 @@ import { ClaimDetailsCard } from "@/components/ClaimDetailsCard";
 import { AIAnalysisPanel } from "@/components/AIAnalysisPanel";
 import { EvidenceViewer } from "@/components/EvidenceViewer";
 import { StatCard } from "@/components/StatCard";
-import { ShieldAlert, TrendingUp, DollarSign, Clock } from "lucide-react";
+import { TrendingUp, DollarSign, Clock, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
+import jessicaLogo from "@/assets/jessica-logo.png";
 
 export interface Claim {
   claim_id: number;
@@ -80,8 +81,8 @@ const FraudDashboard = () => {
     <div className="min-h-screen bg-background">
       <div className="container mx-auto p-6 space-y-6">
         {/* Header */}
-        <div className="flex items-center gap-3 mb-8">
-          <ShieldAlert className="h-8 w-8 text-primary" />
+        <div className="flex items-center gap-4 mb-8">
+          <img src={jessicaLogo} alt="Jessica Logo" className="h-12" />
           <h1 className="text-3xl font-bold text-foreground">Insurance Fraud Analyst Dashboard</h1>
         </div>
 
@@ -100,7 +101,7 @@ const FraudDashboard = () => {
             <div className="bg-card border border-border rounded-lg p-6 shadow-sm">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-muted-foreground">Status</span>
-                <ShieldAlert className="h-4 w-4 text-primary" />
+                <Shield className="h-4 w-4 text-primary" />
               </div>
               <Badge className={getStatusColor(claimDetails.Status)}>
                 {claimDetails.Status || "Unknown"}
@@ -130,7 +131,7 @@ const FraudDashboard = () => {
           </div>
         ) : (
           <div className="text-center p-12 bg-muted/30 rounded-lg border border-border">
-            <ShieldAlert className="h-12 w-12 text-muted-foreground mx-auto mb-3" />
+            <img src={jessicaLogo} alt="Jessica Logo" className="h-16 mx-auto mb-3 opacity-50" />
             <p className="text-muted-foreground">Select a claim to view details</p>
           </div>
         )}
