@@ -53,8 +53,8 @@ export const ClaimSelector = ({ onClaimSelect, selectedClaimId }: ClaimSelectorP
   const getStatusBadgeColor = (status: string) => {
     const statusLower = status?.toLowerCase() || "";
     if (statusLower.includes("fraudulent")) return "destructive";
-    if (statusLower.includes("uncertain")) return "secondary";
-    if (statusLower.includes("valid")) return "default";
+    if (statusLower.includes("uncertain")) return "warning";
+    if (statusLower.includes("valid")) return "success";
     return "outline";
   };
 
