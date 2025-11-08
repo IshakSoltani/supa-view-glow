@@ -55,9 +55,9 @@ const FraudDashboard = () => {
   };
   const getStatusColor = (status: string) => {
     const statusLower = status?.toLowerCase() || "";
-    if (statusLower.includes("approved") || statusLower.includes("paid")) return "bg-success text-success-foreground";
-    if (statusLower.includes("pending") || statusLower.includes("review")) return "bg-warning text-warning-foreground";
-    if (statusLower.includes("denied") || statusLower.includes("flagged")) return "bg-destructive text-destructive-foreground";
+    if (statusLower.includes("fraudulent")) return "bg-destructive text-destructive-foreground";
+    if (statusLower.includes("uncertain")) return "bg-warning text-warning-foreground";
+    if (statusLower.includes("valid")) return "bg-success text-success-foreground";
     return "bg-muted text-muted-foreground";
   };
   const calculateDaysSince = (dateString: string) => {

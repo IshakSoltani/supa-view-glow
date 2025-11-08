@@ -39,7 +39,7 @@ export const ClaimSelector = ({ onClaimSelect, selectedClaimId }: ClaimSelectorP
           Status,
           "Date Reported"
         `)
-        .order("Date Reported", { ascending: false });
+        .order("claim_id", { ascending: true });
 
       if (error) throw error;
       setClaims(data || []);
@@ -52,9 +52,9 @@ export const ClaimSelector = ({ onClaimSelect, selectedClaimId }: ClaimSelectorP
 
   const getStatusBadgeColor = (status: string) => {
     const statusLower = status?.toLowerCase() || "";
-    if (statusLower.includes("approved") || statusLower.includes("paid")) return "default";
-    if (statusLower.includes("pending")) return "secondary";
-    if (statusLower.includes("denied") || statusLower.includes("flagged")) return "destructive";
+    if (statusLower.includes("fraudulent")) return "destructive";
+    if (statusLower.includes("uncertain")) return "secondary";
+    if (statusLower.includes("valid")) return "default";
     return "outline";
   };
 
